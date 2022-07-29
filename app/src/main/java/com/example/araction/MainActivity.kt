@@ -68,6 +68,5 @@ class MainActivity : AppCompatActivity(), ButtonEventListener, RegistrationListe
     //---
 
     private fun initUi() {
-        setContentView(R.layout.activity_main2)
     }
 }
