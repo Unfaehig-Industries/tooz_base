@@ -1,9 +1,9 @@
 package com.example.araction
 
-// tooz imports
 import android.os.Bundle
-import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
+import timber.log.Timber
+import timber.log.Timber.DebugTree
 import tooz.bto.toozifier.Toozifier
 import tooz.bto.toozifier.ToozifierFactory
 import tooz.bto.toozifier.button.Button
@@ -19,6 +19,10 @@ class MainActivity : AppCompatActivity(), ButtonEventListener, RegistrationListe
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        if (BuildConfig.DEBUG) {
+            Timber.plant(DebugTree())
+        }
     }
 
     override fun onResume() {
@@ -34,32 +38,32 @@ class MainActivity : AppCompatActivity(), ButtonEventListener, RegistrationListe
 
     //--- ButtonEventListener (toozifier)
     override fun onButtonEvent(button: Button) {
-        //Log.d("AR Action", "Button pressed: ".plus(button.toString()))
+        Timber.i("Button pressed: ".plus(button.toString()))
         //initUi()
-        //A1_S is the only button which works while this toozer-app is running!!!
+        //A1_S is the only button which works while this toozer-app is running
         //if (button == Button.A_1S) {
-            //
+        //
         //}
     }
     //---
 
     //--- RegistrationListener (toozifier)
     override fun onDeregisterFailure(errorCause: ErrorCause) {
-        Log.d("AR Action", "Deregister failure")
-        Log.d("AR Action", errorCause.code.toString().plus(errorCause.description))
+        Timber.e("Deregister failure")
+        Timber.e(errorCause.code.toString().plus(errorCause.description))
     }
 
     override fun onDeregisterSuccess() {
-        Log.d("AR Action", "Deregister success")
+        Timber.i("Deregister success")
     }
 
     override fun onRegisterFailure(errorCause: ErrorCause) {
-        Log.d("AR Action", "Register failure")
-        Log.d("AR Action", errorCause.code.toString().plus(errorCause.description))
+        Timber.e("Register failure")
+        Timber.e(errorCause.code.toString().plus(errorCause.description))
     }
 
     override fun onRegisterSuccess() {
-        Log.d("AR Action", "Register success")
+        Timber.i("Register success")
     }
     //---
 
